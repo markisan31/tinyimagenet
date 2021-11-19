@@ -7,28 +7,28 @@ transform:
   p: 1.0
   transforms:
   - __class_fullname__: albumentations.augmentations.transforms.RandomRotate90
-    always_apply: false
+    always_apply: true
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.HorizontalFlip
-    always_apply: false
+    always_apply: true
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.Transpose
-    always_apply: false
+    always_apply: true
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.RandomScale
-    always_apply: false
+    always_apply: true
     interpolation: 1
     p: 0.5
     scale_limit:
     - 0.8999999999999999
     - 1.08
   - __class_fullname__: albumentations.augmentations.transforms.RandomCrop
-    always_apply: false
+    always_apply: true
     height: 56
     p: 1.0
     width: 56
   - __class_fullname__: albumentations.augmentations.transforms.RandomGamma
-    always_apply: false
+    always_apply: true
     eps: null
     gamma_limit:
     - 80
