@@ -11,6 +11,7 @@ import torch.nn as nn
 import torchvision
 from omegaconf import DictConfig
 from torch.nn.modules import loss
+from torch.optim.lr_scheduler import StepLR
 from torch.utils.data import DataLoader
 from torch.utils.tensorboard import SummaryWriter
 from tqdm import tqdm
@@ -121,7 +122,8 @@ def torch_scheduler(
     """
     available = [k for k, v in torch.optim.__dict__.items() if callable(v)][5:]
     try:
-        scheduler = getattr(torch.optim.lr_scheduler, name)(optimizer, **kwargs)
+        # scheduler = getattr(torch.optim.lr_scheduler, name)(optimizer, **kwargs)
+        scheduler = scheduler = StepLR(optimizer, step_size=7, gamma=0.1)
     except AttributeError as e:
         log.error(
             f"Scheduler {name} not supported. "
