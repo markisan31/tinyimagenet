@@ -30,7 +30,7 @@ model:
 optimizer:
   name: SGD
   parameters:  # passed as **kwargs
-    lr: 0.001
+    lr: 0.05
     momentum: 0.9
     weight_decay: 1e-5
 
