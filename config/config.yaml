@@ -37,7 +37,6 @@ optimizer:
 scheduler:
   name: StepLR
   parameters:
-    optimizer: SGD
     step_size: 7
     gamma: 0.1
 
