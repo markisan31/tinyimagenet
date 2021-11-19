@@ -35,6 +35,8 @@ optimizer:
     weight_decay: 1e-5
 
 scheduler:
-  name: MY
+  name: StepLR
   parameters:
+    step_size: 7
+    gamma: 0.1
 

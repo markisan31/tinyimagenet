@@ -122,8 +122,8 @@ def torch_scheduler(
     """
     available = [k for k, v in torch.optim.__dict__.items() if callable(v)][5:]
     try:
-        # scheduler = getattr(torch.optim.lr_scheduler, name)(optimizer, **kwargs)
-        scheduler = StepLR(optimizer, step_size=7, gamma=0.1)
+        scheduler = getattr(torch.optim.lr_scheduler, name)(optimizer, **kwargs)
+        # scheduler = StepLR(optimizer, step_size=7, gamma=0.1)
     except AttributeError as e:
         log.error(
             f"Scheduler {name} not supported. "
