@@ -10,10 +10,10 @@ transform:
     always_apply: true
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.HorizontalFlip
-    always_apply: true
+    always_apply: false
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.Transpose
-    always_apply: true
+    always_apply: false
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.RandomScale
     always_apply: true
@@ -28,7 +28,7 @@ transform:
     p: 1.0
     width: 56
   - __class_fullname__: albumentations.augmentations.transforms.RandomGamma
-    always_apply: true
+    always_apply: false
     eps: null
     gamma_limit:
     - 80
