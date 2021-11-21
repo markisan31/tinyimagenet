@@ -7,7 +7,7 @@ transform:
   p: 1.0
   transforms:
   - __class_fullname__: albumentations.augmentations.transforms.RandomRotate90
-    always_apply: false
+    always_apply: true
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.HorizontalFlip
     always_apply: true
