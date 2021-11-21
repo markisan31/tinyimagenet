@@ -51,6 +51,7 @@ def torch_model(
     try:
         if module_name == "torchvision":
             model = getattr(module, arch)(pretrained=pretrained)
+            model.avgpool = nn.AdaptiveAvgPool2d(1)
             model.fc = nn.Linear(model.fc.in_features, n_classes)
         else:
             model = getattr(module, arch)(n_classes=n_classes)
