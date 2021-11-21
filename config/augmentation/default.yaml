@@ -23,7 +23,7 @@ transform:
     - 0.8999999999999999
     - 1.08
   - __class_fullname__: albumentations.augmentations.transforms.RandomCrop
-    always_apply: false
+    always_apply: true
     height: 56
     p: 1.0
     width: 56
