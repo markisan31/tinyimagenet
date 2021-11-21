@@ -10,7 +10,7 @@ transform:
     always_apply: false
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.HorizontalFlip
-    always_apply: true
+    always_apply: false
     p: 0.5
   - __class_fullname__: albumentations.augmentations.transforms.Transpose
     always_apply: false
@@ -23,7 +23,7 @@ transform:
     - 0.8999999999999999
     - 1.08
   - __class_fullname__: albumentations.augmentations.transforms.RandomCrop
-    always_apply: true
+    always_apply: false
     height: 56
     p: 1.0
     width: 56
