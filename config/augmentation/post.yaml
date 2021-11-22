@@ -6,6 +6,11 @@ transform:
   keypoint_params: null
   p: 1.0
   transforms:
+  - __class_fullname__: albumentations.augmentations.geometric.resize.Resize
+    always_apply: true
+    height: 224
+    width: 224
+    interpolation: 1
   - __class_fullname__: albumentations.augmentations.transforms.Normalize
     mean: [0.4802, 0.4481, 0.3975]  # Tiny Imagenet stats
     std: [0.2302, 0.2265, 0.2262]
