@@ -56,18 +56,19 @@ def main(cfg: DictConfig) -> None:
         pre_transform = albu.load(hydra.utils.to_absolute_path(cfg.augmentation.pre), data_format="yaml")
         main_transform = albu.load(hydra.utils.to_absolute_path(cfg.augmentation.main), data_format="yaml")
         post_transform = albu.load(hydra.utils.to_absolute_path(cfg.augmentation.post), data_format="yaml")
+        valid_tarnsform = albu.load(hydra.utils.to_absolute_path(cfg.augmentation.valid), data_format="yaml")
         log.info(f"Loaded transforms from:\n{OmegaConf.to_yaml(cfg.augmentation)}")
 
         log.debug(pre_transform)
         log.debug(main_transform)
         log.debug(post_transform)
 
-        train_transform = albu.Compose([pre_transform, main_transform, post_transform])
-        valid_transform = albu.Compose([pre_transform, post_transform])
+        train_transform = albu.Compose([main_transform, post_transform])
+        valid_transform = albu.Compose([valid_tarnsform, post_transform])
     else:
         log.info("Augmentations will not be applied")
-        train_transform = post_transform
-        valid_transform = post_transform
+        # train_transform = post_transform
+        # valid_transform = post_transform
 
     # Dataset
     train_dataset = TinyImagenetDataset(train_path, cfg.data, train_transform)

@@ -12,6 +12,7 @@ from pandas import DataFrame
 from PIL import Image
 from torch.utils.data.dataloader import default_collate
 from torch.utils.data.dataset import Dataset
+import torch.nn.functional as func
 
 from modules.pytorch_typing import Transform
 
@@ -23,20 +24,20 @@ def get_labels_mapping(cfg: DictConfig) -> Tuple[Dict[Any, int], Dict[str, Any]]
     :return: tuple(folders_to_num, val_labels)
     """
     try:
-        data_root = Path(hydra.utils.to_absolute_path(cfg.root))
+        data_root = '/Users/markkalda/Downloads/tinyimagenet/data'
     except AttributeError:
         # Handle standalone run
-        data_root = Path(cfg.root)
+        data_root = Path(cfg.data.root)
     all_folders = [
         dir_name
-        for r, d, f in os.walk(data_root / cfg.train)
+        for r, d, f in os.walk('/Users/markkalda/Downloads/tinyimagenet/data/tiny-imagenet-200/train')
         for dir_name in d
         if dir_name != "images"
     ]
     folders_to_num = {val: index for index, val in enumerate(all_folders)}
 
     val_labels = pd.read_csv(
-        data_root / cfg.val / cfg.val_labels,
+        '/Users/markkalda/Downloads/tinyimagenet/data/tiny-imagenet-200/val/val_annotations.txt',
         sep="\t",
         header=None,
         index_col=0,
@@ -116,6 +117,8 @@ class TinyImagenetDataset(Dataset):
         image = np.array(Image.open(path).convert("RGB"))
         if self._transform:
             image = self._transform(image=image)["image"]  # type: ignore
+            # print(image.shape)
+            # image = func.interpolate(image, size=(224, 224), mode='bilinear', align_corners=False)
         return DatasetItem(image=image, label=label, id=index, path=path)
 
     def __len__(self) -> int:

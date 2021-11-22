@@ -36,7 +36,7 @@ def evaluate_model(
     log.info(f"Read config from {cfg_path}")
 
     cfg = OmegaConf.load(str(cfg_path))
-    log.debug(f"Config:\n{cfg.pretty()}")
+    # log.debug(f"Config:\n{cfg.pretty()}")
 
     # Specify results paths from config
     checkpoint_path = results_root / cfg.results.checkpoints.root
