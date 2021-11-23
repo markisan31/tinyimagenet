@@ -30,7 +30,7 @@ def get_labels_mapping(cfg: DictConfig) -> Tuple[Dict[Any, int], Dict[str, Any]]
         data_root = Path(cfg.data.root)
     all_folders = [
         dir_name
-        for r, d, f in os.walk(data_root / cfg.train)
+        for r, d, f in os.walk('/content/tinyimagenet/data/tiny-imagenet-200/train')
         for dir_name in d
         if dir_name != "images"
     ]
