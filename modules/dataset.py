@@ -30,14 +30,14 @@ def get_labels_mapping(cfg: DictConfig) -> Tuple[Dict[Any, int], Dict[str, Any]]
         data_root = Path(cfg.data.root)
     all_folders = [
         dir_name
-        for r, d, f in os.walk('/content/tinyimagenet/data/tiny-imagenet-200/train')
+        for r, d, f in os.walk('/content/tinyimagenet/data/tiny-imagenet-200/test')
         for dir_name in d
         if dir_name != "images"
     ]
     folders_to_num = {val: index for index, val in enumerate(all_folders)}
 
     val_labels = pd.read_csv(
-        data_root / cfg.val / cfg.val_labels,
+        '/content/tinyimagenet/data/tiny-imagenet-200/val/val_annotations.txt',
         sep="\t",
         header=None,
         index_col=0,
