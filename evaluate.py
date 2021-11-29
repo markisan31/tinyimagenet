@@ -3,10 +3,13 @@ import logging
 from pathlib import Path
 from typing import Tuple, Union
 
+import albumentations as albu
 import numpy as np
 import torch
+from hydra.utils import to_absolute_path
 from omegaconf import OmegaConf
 from torch.nn.modules import loss
+from torch.utils.data import DataLoader
 
 from modules.dataset import DatasetItem, TinyImagenetDataset
 from modules.runner import test, torch_model
@@ -14,7 +17,7 @@ from modules.transform import to_tensor_normalize
 
 
 def evaluate_model(
-    results_root: Union[str, Path], data_part: str = "val", device: str = "cuda"
+        results_root: Union[str, Path], data_part: str = "val", device: str = "cuda"
 ) -> Tuple[float, float, np.ndarray]:
     """
     The main training function
@@ -56,9 +59,21 @@ def evaluate_model(
         )
         raise FileNotFoundError
 
-    base_transform = to_tensor_normalize()
-    test_dataset = TinyImagenetDataset(test_path, cfg, base_transform)
-    test_loader = torch.utils.data.DataLoader(
+    valid_transform = to_tensor_normalize()
+    if "augmentation" in cfg:
+        pre_transform = albu.load(
+            to_absolute_path(cfg.augmentation.pre), data_format="yaml"
+        )
+
+        post_transform = albu.load(
+            to_absolute_path(cfg.augmentation.post), data_format="yaml"
+        )
+
+        valid_transform = albu.Compose([pre_transform, post_transform])
+
+    log.info(f"Loaded transforms from:\n{valid_transform}")
+    test_dataset = TinyImagenetDataset(test_path, cfg.data, valid_transform)
+    test_loader = DataLoader(
         test_dataset,
         batch_size=cfg.train.batch_size,
         shuffle=False,
