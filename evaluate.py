@@ -57,7 +57,7 @@ def evaluate_model(
         raise FileNotFoundError
 
     base_transform = to_tensor_normalize()
-    test_dataset = TinyImagenetDataset('/content/tinyimagenet/data/tiny-imagenet-200/test', cfg, base_transform)
+    test_dataset = TinyImagenetDataset(test_path, cfg, base_transform)
     test_loader = torch.utils.data.DataLoader(
         test_dataset,
         batch_size=cfg.train.batch_size,

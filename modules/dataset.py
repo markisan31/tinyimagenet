@@ -24,20 +24,20 @@ def get_labels_mapping(cfg: DictConfig) -> Tuple[Dict[Any, int], Dict[str, Any]]
     :return: tuple(folders_to_num, val_labels)
     """
     try:
-        data_root = Path(hydra.utils.to_absolute_path(cfg.root))
+        data_root = '/Users/markkalda/Downloads/tinyimagenet/data'
     except AttributeError:
         # Handle standalone run
         data_root = Path(cfg.data.root)
     all_folders = [
         dir_name
-        for r, d, f in os.walk('/content/tinyimagenet/data/tiny-imagenet-200/test')
+        for r, d, f in os.walk('/Users/markkalda/Downloads/tinyimagenet/data/tiny-imagenet-200/train')
         for dir_name in d
         if dir_name != "images"
     ]
     folders_to_num = {val: index for index, val in enumerate(all_folders)}
 
     val_labels = pd.read_csv(
-        '/content/tinyimagenet/data/tiny-imagenet-200/val/val_annotations.txt',
+        '/Users/markkalda/Downloads/tinyimagenet/data/tiny-imagenet-200/val/val_annotations.txt',
         sep="\t",
         header=None,
         index_col=0,

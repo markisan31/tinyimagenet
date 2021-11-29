@@ -20,7 +20,7 @@ results:
 train:
   epochs: 30
   batch_size: 512
-  num_workers: 4
+  num_workers: 8
   monitor: val_acc
 
 model:
